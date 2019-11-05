@@ -773,7 +773,7 @@ input[type=number] {
 
 /** Usuarios section **/
 
-.users {
+.users, .orders{
     padding-bottom: 70px;
     font-family: Poppins;
     background: #0c0f38;
