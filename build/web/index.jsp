@@ -35,7 +35,7 @@
                             <div class="full">
                                 <div class="center-desk">
                                     <div class="logo">
-                                        <a href="index.html"><img src="resources/images/logo.png" alt="#" /></a>
+                                        <a href="index.jsp"><img src="resources/images/logo.png" alt="#" /></a>
                                     </div>
                                 </div>
                             </div>
@@ -51,13 +51,13 @@
                                             <a class="nav-link" href="#">Inicio</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#service">Nuestros productos</a>
+                                            <a class="nav-link" href="#ProductsH">Nuestros productos</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Ver mi carrito</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#contact">Iniciar sesión</a>
+                                            <a class="nav-link" href="#Login">Iniciar sesión</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -78,7 +78,7 @@
                             <h1>Power ful<br> Web Hosting</h1>
                             <span>Landing Page 2019</span>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                            <a href="#contact">Get Started</a>
+                            <a href="#Login">Get Started</a>
                         </div>
                     </div>
                     <div class="col-md-7">
@@ -90,8 +90,8 @@
             </div>
         </section>
         <!-- end banner -->
-        <!-- Services  -->
-        <div id="service" class="Services">
+        <!-- Products  -->
+        <div id="ProductsH" class="productsH">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -127,42 +127,42 @@
                             </div>
                         </div>
                         <!-- Fin modal prueba -->
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img src="resources/images/01.png" alt="#" />
                             <h3>Afterparty</h3>
                             <button type="button" class="btnBlack" data-toggle="modal" data-target="#exampleModal">Ver información</button>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img src="resources/images/02.png" alt="#" />
                             <h3>The Outer Worlds</h3>
                             <button type="button" class="btnBlack">Ver información</button>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img src="resources/images/03.png" alt="#" />
                             <h3>ReadySet Heroes</h3>
                             <button type="button" class="btnBlack">Ver información</button>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img src="resources/images/04.png" alt="#" />
                             <h3>Ruiner</h3>
                             <button type="button" class="btnBlack">Ver información</button>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img src="resources/images/05.png" alt="#" />
                             <h3>Control</h3>
                             <button type="button" class="btnBlack">Ver información</button>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img src="resources/images/06.png" alt="#" />
                             <h3>Cyberpunk 2077</h3>
                             <button type="button" class="btnBlack">Ver información</button>
@@ -172,14 +172,15 @@
                 </div>
             </div>
         </div>
-        <!-- end Servicess -->
-        <!-- contact -->
-        <div id="contact" class="contact">
+        <!-- end Products -->
+        <!-- Login - Register -->
+        <div id="Login" class="login">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="titlepage">
-                            <h2>Unete a nuestra comunidad</h2><br>
+                            <h2>Unete a nuestra comunidad</h2><br><br>
+                            <span>Millones de jugadores alrededor del mundo.</span>
                         </div>
                     </div>
                 </div>
@@ -193,10 +194,12 @@
                                         <i><img id="icon_gamer" src="resources/images/icons/gamer.png" alt="#"></i>
                                     </div>
                                     <div class="col-sm-12">
-                                        <input class="contactus" placeholder="Usuario" type="text" name="Usuario">
+                                        <label>Usuario</label>
+                                        <input class="contactus" type="text" name="Usuario">
                                     </div>
                                     <div class="col-sm-12">
-                                        <input class="contactus" placeholder="Contraseña" type="text" name="Contraseña">
+                                        <label>Contraseña</label>
+                                        <input class="contactus" type="text" name="Contraseña">
                                     </div>
                                     <div class="col-sm-12">
                                         <button class="btnBlack">Ingresar</button>
@@ -212,13 +215,16 @@
                                         <i><img id="icon_gamer" src="resources/images/icons/start.png" alt="#"></i>
                                     </div>
                                     <div class="col-sm-12">
-                                        <input class="contactus" placeholder="Ingrese un usuario" type="text" name="Usuario">
+                                        <label>Ingrese un usuario</label>
+                                        <input class="contactus" type="text" name="Usuario">
                                     </div>
                                     <div class="col-sm-12">
-                                        <input class="contactus" placeholder="Correo electrónico" type="text" name="Correo">
+                                        <label>Correo electrónico</label>
+                                        <input class="contactus" type="text" name="Correo">
                                     </div>
                                     <div class="col-sm-12">
-                                        <input class="contactus" placeholder="Contraseña" type="password" name="Contraseña">
+                                        <label>Contraseña</label>
+                                        <input class="contactus" type="password" name="Contraseña">
                                     </div>
                                     <div class="col-sm-12">
                                         <button class="btnBlack">Registrar</button>
@@ -230,7 +236,7 @@
                 </div>
             </div>
         </div>
-        <!-- end contact -->
+        <!-- end Login - Register -->
         <!--  footer -->
         <footer>
             <div class="footer">
@@ -258,7 +264,6 @@
                     </div>
                 </div>
             </div>
-
         </footer>
         <!-- end footer -->
         <!-- Javascript files-->

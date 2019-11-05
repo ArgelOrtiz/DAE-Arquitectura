@@ -74,27 +74,43 @@
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <div id="Usuarios" class="usuarios">
+                        <div id="Users" class="users">
                             <div class="container">
-                                <div id="form-usuarios">
+                                <div id="form-users">
                                     <form class="main_form" method="POST">
                                         <div class="row">
                                             <div class="col-sm-12 main_title">
                                                 <span>Usuario</span>
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6">
                                                 <label>Identificador</label>
                                                 <input class="contactus" type="text" name="id">
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6">
                                                 <label>Usuario</label>
-                                                <input class="contactus" placeholder="Usuario" type="text" name="usuario">
+                                                <input class="contactus" type="text" name="user">
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6">
+                                                <label>Primer apellido</label>
+                                                <input class="contactus" type="text" name="f_name">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Segundo apellido</label>
+                                                <input class="contactus" type="text" name="l_name">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Contraseña</label>
+                                                <input class="contactus" type="password" name="password">
+                                            </div>
+                                            <div class="col-sm-6">
                                                 <label>Correo electrónico</label>
-                                                <input class="contactus" placeholder="Correo electrónico" type="text" name="correo">
+                                                <input class="contactus" type="text" name="email">
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div class="col-sm-6">
+                                                <label>Teléfono celular</label>
+                                                <input class="contactus" type="number" name="cellphone">
+                                            </div>
+                                            <div class="col-sm-6">
                                                 <label>Tipo de usuario</label>
                                                 <select class="contactus">
                                                     <option >Administrador</option>
@@ -117,69 +133,130 @@
             </div>
         </section>
         <!-- end banner -->
-        <!-- Tabla productos -->
-        <div id="service" class="Services">
+        <!-- Table users -->
+        <div id="UsersT" class="users">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="titlepage">
-                            <h2>Nuestros clientes</h2>
+                            <h2>Todos nuestros usuarios</h2>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img class="user_icon" src="resources/images/icons/user_icon.png" alt="#" />
-                            <h3>Afterparty</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img class="user_icon" src="resources/images/icons/user_icon.png" alt="#" />
-                            <h3>The Outer Worlds</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img class="user_icon" src="resources/images/icons/user_icon.png" alt="#" />
-                            <h3>ReadySet Heroes</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img class="user_icon" src="resources/images/icons/user_icon.png" alt="#" />
-                            <h3>Ruiner</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img class="user_icon" src="resources/images/icons/user_icon.png" alt="#" />
-                            <h3>Control</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img class="user_icon" src="resources/images/icons/user_icon.png" alt="#" />
-                            <h3>Cyberpunk 2077</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
+                    <table class="table table-striped table-dark">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>User</th>
+                                <th>Contraseña</th>
+                                <th>Tipo usuario</th>
+                                <th>Nombre/s</th>
+                                <th>Apellidos</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>1</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th>Cell</th>
+                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- end table users -->
+        <!--  footer -->
+        <footer>
+            <div class="footer">
+                <div class="copyright">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>© 2019 Todos los derechos reservados.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- end tabla productos -->
+        </footer>
+        <!-- end footer -->
 
         <!-- Javascript files-->
         <script src="resources/js/jquery.min.js"></script>

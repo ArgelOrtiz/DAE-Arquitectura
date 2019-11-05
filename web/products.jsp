@@ -74,9 +74,9 @@
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <div id="Productos" class="productos">
+                        <div id="Products" class="products">
                             <div class="container">
-                                <div id="form-productos">
+                                <div id="form-products">
                                     <form class="main_form" method="POST">
                                         <div class="row">
                                             <div class="col-sm-12 main_title">
@@ -92,23 +92,23 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Nombre del producto</label>
-                                                <input class="contactus" placeholder="Nombre producto" type="text" name="nombre_producto">
+                                                <input class="contactus" type="text" name="nombre_producto">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Clave del departamento</label>
-                                                <input class="contactus" placeholder="Clave departamente" type="text" name="departamento">
+                                                <input class="contactus" type="text" name="departamento">
                                             </div>
                                             <div class="col-sm-12">
                                                 <label>Descripción dle producto</label>
-                                                <input class="textarea" placeholder="" type="text" name="descripcion_producto">
+                                                <input class="textarea" type="text" name="descripcion_producto">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Precio unitario</label>
-                                                <input class="contactus" placeholder="" type="number" name="costo_unidad">
+                                                <input class="contactus" type="number" name="costo_unidad">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Existencia</label>
-                                                <input class="contactus" placeholder="" type="number" name="existencia">
+                                                <input class="contactus" type="number" name="existencia">
                                             </div>
                                             <div class="col-sm-12">
                                                 <button id="btnBuscar" class="btnBlack">Buscar</button>
@@ -125,8 +125,8 @@
             </div>
         </section>
         <!-- end banner -->
-        <!-- Tabla productos -->
-        <div id="service" class="Services">
+        <!-- Productos -->
+        <div id="ProductsT" class="productsT">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -137,15 +137,15 @@
                 </div>
                 <div class="row">
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
                             <img src="resources/images/01.png" alt="#" />
                             <h3>Afterparty</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
+                            <a href="#header"><button class="btnBlack" href="#header">Ver información</button></a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
                             <img src="resources/images/02.png" alt="#" />
                             <h3>The Outer Worlds</h3>
@@ -153,7 +153,7 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
                             <img src="resources/images/03.png" alt="#" />
                             <h3>ReadySet Heroes</h3>
@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
                             <img src="resources/images/04.png" alt="#" />
                             <h3>Ruiner</h3>
@@ -169,7 +169,7 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
                             <img src="resources/images/05.png" alt="#" />
                             <h3>Control</h3>
@@ -177,7 +177,7 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="Services-box">
+                        <div class="products-box">
                             <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
                             <img src="resources/images/06.png" alt="#" />
                             <h3>Cyberpunk 2077</h3>
@@ -187,7 +187,22 @@
                 </div>
             </div>
         </div>
-        <!-- end tabla productos -->
+        <!-- end productos -->
+        <!--  footer -->
+        <footer>
+            <div class="footer">
+                <div class="copyright">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>© 2019 Todos los derechos reservados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end footer -->
 
         <!-- Javascript files-->
         <script src="resources/js/jquery.min.js"></script>
