@@ -1,3 +1,6 @@
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +16,10 @@
         <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.min.css">
     </head>
     <body class="main-layout">
+        <%
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("SemestreJPAPU");
+            EntityManager em = emf.createEntityManager();
+        %>
         <!-- loader  -->
         <div class="loader_bg">
             <div class="loader"><img src="resources/images/loading.gif" alt="#" /></div>
@@ -77,18 +84,19 @@
                         <div id="Users" class="users">
                             <div class="container">
                                 <div id="form-users">
-                                    <form class="main_form" method="POST">
+                                    <form class="main_form" method="POST" action="./UserController">
+                                        <%!String val = "";%>
                                         <div class="row">
                                             <div class="col-sm-12 main_title">
                                                 <span>Usuario</span>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Identificador</label>
-                                                <input class="contactus" type="text" name="id">
+                                                <input class="contactus" type="text" name="id_user">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Usuario</label>
-                                                <input class="contactus" type="text" name="user">
+                                                <input class="contactus" type="text" name="user" value="<% val = request.getAttribute("infoUser").toString(); val != null ? %>">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Primer apellido</label>
@@ -112,16 +120,15 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Tipo de usuario</label>
-                                                <select class="contactus">
-                                                    <option >Administrador</option>
-                                                    <option >Trabajador</option>
-                                                    <option >Cliente</option>
+                                                <select class="contactus" name="user_type">
+                                                    <option value="Admin">Administrador</option>
+                                                    <option value="Customer">Cliente</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-12">
-                                                <button id="btnBuscar" class="btnBlack">Buscar</button>
-                                                <button id="btnInsertar" class="btnBlack">Insertar</button>
-                                                <button id="btnModificar" class="btnBlack">Modificar</button>
+                                                <button id="btnBuscar" class="btnBlack" value="Read" name="action">Buscar</button>
+                                                <button id="btnInsertar" class="btnBlack" value="Insert" name="action">Insertar</button>
+                                                <button id="btnModificar" class="btnBlack" value="Update" name="action">Modificar</button>
                                             </div>
                                         </div>
                                     </form>

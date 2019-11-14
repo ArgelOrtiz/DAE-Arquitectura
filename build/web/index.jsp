@@ -78,7 +78,7 @@
                             <h1>Power ful<br> Web Hosting</h1>
                             <span>Landing Page 2019</span>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                            <a href="#Login">Get Started</a>
+                            <a href="#Login">Iniciar</a>
                         </div>
                     </div>
                     <div class="col-md-7">
@@ -187,7 +187,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="login" class="col-md-6">
-                            <form class="main_form">
+                            <form class="main_form" method="POST" action="./UserController">
                                 <div class="row">
                                     <div class="col-sm-12 main_title">
                                         <span>Iniciar sesión</span>
@@ -195,20 +195,20 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <label>Usuario</label>
-                                        <input class="contactus" type="text" name="Usuario">
+                                        <input class="contactus" type="text" name="userI">
                                     </div>
                                     <div class="col-sm-12">
                                         <label>Contraseña</label>
-                                        <input class="contactus" type="text" name="Contraseña">
+                                        <input class="contactus" type="text" name="passwordI">
                                     </div>
                                     <div class="col-sm-12">
-                                        <button class="btnBlack">Ingresar</button>
+                                        <button class="btnBlack" value="Login" name="action">Ingresar</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div id="registro" class="col-md-6">
-                            <form class="main_form">
+                            <form class="main_form" method="POST" action="./UserController">
                                 <div class="row">
                                     <div class="col-sm-12 main_title">
                                         <span>Registro</span>
@@ -216,18 +216,18 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <label>Ingrese un usuario</label>
-                                        <input class="contactus" type="text" name="Usuario">
+                                        <input class="contactus" type="text" name="userR">
                                     </div>
                                     <div class="col-sm-12">
                                         <label>Correo electrónico</label>
-                                        <input class="contactus" type="text" name="Correo">
+                                        <input class="contactus" type="text" name="emailR">
                                     </div>
                                     <div class="col-sm-12">
                                         <label>Contraseña</label>
-                                        <input class="contactus" type="password" name="Contraseña">
+                                        <input class="contactus" type="password" name="passwordR">
                                     </div>
                                     <div class="col-sm-12">
-                                        <button class="btnBlack">Registrar</button>
+                                        <button class="btnBlack" value="Register" name="action">Registrar</button>
                                     </div>
                                 </div>
                             </form>

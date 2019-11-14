@@ -710,7 +710,7 @@ input[type=number] {
     max-width: 100px;
 }
 
-#Products .btnEliminar{
+#Products .btnEliminar, #ProductsT .btnEliminar{
     width: 32px;
     position: absolute;
     top: 8px;
