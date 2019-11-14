@@ -85,7 +85,6 @@
                             <div class="container">
                                 <div id="form-users">
                                     <form class="main_form" method="POST" action="./UserController">
-                                        <%!String val = "";%>
                                         <div class="row">
                                             <div class="col-sm-12 main_title">
                                                 <span>Usuario</span>
@@ -96,7 +95,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Usuario</label>
-                                                <input class="contactus" type="text" name="user" value="<% val = request.getAttribute("infoUser").toString(); val != null ? %>">
+                                                <input class="contactus" type="text" name="user" value="">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Primer apellido</label>
