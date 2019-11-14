@@ -87,9 +87,9 @@ public class UserController extends HttpServlet {
                     tx.begin();
                     try{
                         tx.commit();
-                        request.setAttribute("infoUser", userFind);
+                        /*request.setAttribute("infoUser", userFind);
                         RequestDispatcher vista = request.getRequestDispatcher("users.jsp");
-                        vista.forward(request, response);
+                        vista.forward(request, response);*/
                     }catch(Exception e){
                         tx.rollback();
                         System.out.println(e);
