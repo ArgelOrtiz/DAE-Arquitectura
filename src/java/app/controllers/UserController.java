@@ -27,8 +27,6 @@ public class UserController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = (String)request.getParameter("action");
-            List<User> users = em.createQuery("SELECT u FROM User u").getResultList();
-            request.setAttribute("allUsers", users);
             
             switch(action){
                 case "Login":

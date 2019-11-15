@@ -76,9 +76,9 @@
                 <div class="row d_flex">
                     <div class="col-md-5">
                         <div class="text-bg">
-                            <h1>Power ful<br> Web Hosting</h1>
-                            <span>Landing Page 2019</span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                            <h1>El mejor sitio.<br>DIVIERTETE</h1>
+                            <span>Crea tu propia aventura</span>
+                            <p>Estamos comprometidos con ofrecer el mejor servicio y precios accesibles para nuestros clientes, buscamos expandirnos para conseguir muchas más licencias.</p>
                             <a href="#Login">Iniciar</a>
                         </div>
                     </div>

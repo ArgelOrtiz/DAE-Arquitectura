@@ -20,6 +20,14 @@
         <servlet-name>UserDelete</servlet-name>
         <servlet-class>app.controllers.UserDelete</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductInformation</servlet-name>
+        <servlet-class>app.controllers.ProductInformation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDelete</servlet-name>
+        <servlet-class>app.controllers.ProductDelete</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>UserDelete</servlet-name>
         <url-pattern>/UserDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductInformation</servlet-name>
+        <url-pattern>/ProductInformation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDelete</servlet-name>
+        <url-pattern>/ProductDelete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

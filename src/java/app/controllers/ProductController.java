@@ -1,20 +1,21 @@
 package app.controllers;
 
 import app.models.Product;
+import app.models.User;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 
 public class ProductController extends HttpServlet {
@@ -22,18 +23,17 @@ public class ProductController extends HttpServlet {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         
-
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String action = (String)request.getParameter("action");
-            int lastId;
+            String actionP = (String)request.getParameter("actionP");
             
-            switch(action){   
-                case "Create":
+            switch(actionP){   
+                case "CreateP":
+                    int lastId;
                     String name = (String)request.getParameter("product_name");
-                    Part file = request.getPart("image_path");
+                    String file = (String)request.getParameter("image_path");
                     String information = (String)request.getParameter("description");
                     BigDecimal unit_cost = new BigDecimal(request.getParameter("unitCost"));
                     int stock = (Integer.parseInt(request.getParameter("stock")));
@@ -43,26 +43,67 @@ public class ProductController extends HttpServlet {
                     try{
                         Query query = em.createQuery("SELECT Max(p.idProduct) FROM Product p");
                         
-                        if(query.getSingleResult()== null){
-                            lastId = (Integer)1;
+                        if(query.getSingleResult() == null){
+                            lastId = 1;
                         }else{
                             lastId = (Integer) query.getSingleResult();
                             lastId++;
                         }
 
-                        //Product createProduct = new Product(lastId, name, , information, unit_cost, stock, departament);
+                        Product createProduct = new Product(lastId, name, file, information, unit_cost, stock, departament);
+                        out.println(createProduct.getName());
                         
-                        //em.persist(createProduct);
+                        em.persist(createProduct);
                         tx.commit();
                         out.println("Se insertó el producto de forma exitosa");
+                        RequestDispatcher vista = request.getRequestDispatcher("products.jsp");
+                        vista.forward(request, response);
                     }catch(Exception e){
                         tx.rollback();
                         out.println(e);
                     }
                     break;
-                case "Update":
+                case "UpdateP":
+                    int idP = Integer.parseInt(request.getParameter("id_product"));                    
+                    Product productFindU = em.find(Product.class, idP);
+                    
+                    String nameU = (String)request.getParameter("product_name");
+                    String fileU = (String)request.getParameter("image_path");
+                    String informationU = (String)request.getParameter("description");
+                    BigDecimal unit_costU = new BigDecimal(request.getParameter("unitCost"));
+                    int stockU = (Integer.parseInt(request.getParameter("stock")));
+                    String departamentU = (String)request.getParameter("departament");
+                    
+                    tx.begin();
+                    try{
+                        productFindU.setName(nameU);
+                        productFindU.setImagePath(fileU);
+                        productFindU.setInformation(informationU);
+                        productFindU.setUnitCost(unit_costU);
+                        productFindU.setStock(stockU);
+                        productFindU.setDepartament(departamentU);
+                        tx.commit();
+                        System.out.println("El registro se modificó con éxito");
+                        RequestDispatcher vista = request.getRequestDispatcher("products.jsp");
+                        vista.forward(request, response);
+                    }catch(Exception e){
+                        tx.rollback();
+                        System.out.println(e);
+                    }
                     break;
-                case "Read":
+                case "ReadP":
+                    int id = Integer.parseInt(request.getParameter("id_product"));                    
+                    Product productFind = em.find(Product.class, id);
+                    tx.begin();
+                    try{
+                        tx.commit();
+                        request.setAttribute("infoProduct", productFind);
+                        RequestDispatcher vista = request.getRequestDispatcher("products.jsp");
+                        vista.forward(request, response);
+                    }catch(Exception e){
+                        tx.rollback();
+                        System.out.println(e);
+                    }
                     break;
             }
         }

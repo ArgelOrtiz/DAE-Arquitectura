@@ -1,6 +1,6 @@
 package app.controllers;
 
-import app.models.User;
+import app.models.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.persistence.EntityManager;
@@ -13,23 +13,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UserDelete extends HttpServlet {
+
+public class ProductInformation extends HttpServlet {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("DAE-ArquitecturaPU");
     EntityManager em = emf.createEntityManager();
     EntityTransaction tx = em.getTransaction();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int idU = Integer.parseInt(request.getParameter("idTabla"));                    
-            User userFind = em.find(User.class, idU);
+            int idU = Integer.parseInt(request.getParameter("idTablaP"));                    
+            Product productFind = em.find(Product.class, idU);
             tx.begin();
             try{
-                em.remove(userFind);
                 tx.commit();
-                System.out.println("Se eliminó la asignatura de forma éxitosa");
-                RequestDispatcher vista = request.getRequestDispatcher("users.jsp");
+                request.setAttribute("infoProduct", productFind);
+                RequestDispatcher vista = request.getRequestDispatcher("products.jsp");
                 vista.forward(request, response);
             }catch(Exception e){
                 tx.rollback();

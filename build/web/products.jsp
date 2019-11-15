@@ -1,8 +1,11 @@
+<%@page import="java.util.List"%>
+<%@page import="app.models.Product"%>
 <%@page import="javax.persistence.Persistence"%>
 <%@page import="javax.persistence.EntityManager"%>
 <%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -77,7 +80,14 @@
         <!-- end header inner -->
         <!-- end header -->
         <!-- banner -->
-        <section class="banner_main">
+        <section class="banner_main" 
+                 <% 
+                    if (sesion.getAttribute("privilegio").toString() != "Admin") {
+                            out.print("hidden");
+                        }
+                 %>
+                 
+                 >
             <div class="container">
                 <div class="row d_flex">
                     <div class="col-md-5">
@@ -91,43 +101,43 @@
                         <div id="Products" class="products">
                             <div class="container">
                                 <div id="form-products">
-                                    <form class="main_form" method="POST" action="./ProductController" enctype="multipart/form-data">
+                                    <form class="main_form" method="POST" action="./ProductController">
                                         <div class="row">
                                             <div class="col-sm-12 main_title">
                                                 <span>Producto</span>
                                             </div>
                                             <div class="col-sm-12">
                                                 <label>Identificador</label>
-                                                <input class="contactus" type="text" name="id">
+                                                <input class="contactus" type="text" name="id_product" value="${infoProduct.getIdProduct()}">
                                             </div>
                                             <div class="col-sm-12">
                                                 <label>Imagen del producto</label>
-                                                <input class="contactus" type="file" name="image_path">
+                                                <input class="contactus" type="text" name="image_path" value="${infoProduct.getImagePath()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Nombre del producto</label>
-                                                <input class="contactus" type="text" name="product_name">
+                                                <input class="contactus" type="text" name="product_name" value="${infoProduct.getName()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Clave del departamento</label>
-                                                <input class="contactus" type="text" name="departament">
+                                                <input class="contactus" type="text" name="departament" value="${infoProduct.getDepartament()}">
                                             </div>
                                             <div class="col-sm-12">
                                                 <label>Descripción del producto</label>
-                                                <input class="textarea" type="text" name="description">
+                                                <input class="textarea" type="text" name="description" value="${infoProduct.getInformation()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Precio unitario</label>
-                                                <input class="contactus" type="number" name="unitCost">
+                                                <input class="contactus" type="number" name="unitCost" step="any" value="${infoProduct.getUnitCost()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Existencia</label>
-                                                <input class="contactus" type="number" name="stock">
+                                                <input class="contactus" type="number" name="stock" value="${infoProduct.getStock()}">
                                             </div>
                                             <div class="col-sm-12">
-                                                <button id="btnBuscar" class="btnBlack" value="Read" name ="action">Buscar</button>
-                                                <button id="btnInsertar" class="btnBlack" value="Create" name ="action">Insertar</button>
-                                                <button id="btnModificar" class="btnBlack" value="Update" name ="action">Modificar</button>
+                                                <button id="btnBuscar" class="btnBlack" value="ReadP" name="actionP">Buscar</button>
+                                                <button id="btnInsertar" class="btnBlack" value="CreateP" name="actionP">Insertar</button>
+                                                <button id="btnModificar" class="btnBlack" value="UpdateP" name="actionP">Modificar</button>
                                             </div>
                                         </div>
                                     </form>
@@ -150,6 +160,31 @@
                     </div>
                 </div>
                 <div class="row">
+                    <% 
+                        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DAE-ArquitecturaPU");
+                        EntityManager em = emf.createEntityManager();
+                        List<Product> products = em.createQuery("SELECT p FROM Product p").getResultList();
+                    %>
+                    <c:forEach var="item" items="<%=products%>">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                        <div class="products-box">
+                            <form method="POST" action="ProductDelete">
+                                <input type="hidden" name="idTabla" value="${item.getIdProduct()}">
+                                <button class="" name="btnEliminar">
+                                    <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png"/>
+                                </button>
+                            </form>
+                            
+                            <img src="resources/images/01.png" alt="#" />
+                            <h3>${item.getName()}</h3>
+                            <form method="POST" action="ProductInformation">
+                                <input type="hidden" name="idTablaP" value="${item.getIdProduct()}">
+                                <a href="#header"><button class="btnBlack" href="#header" name="btnInformacion">Ver información</button></a>
+                            </form>
+                            
+                        </div>
+                    </div>
+                    </c:forEach>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
                         <div class="products-box">
                             <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />

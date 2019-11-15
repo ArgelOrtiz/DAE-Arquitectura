@@ -50,7 +50,7 @@ public class Product implements Serializable {
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "image_path")
-    private byte[] imagePath;
+    private String imagePath;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -80,7 +80,7 @@ public class Product implements Serializable {
         this.idProduct = idProduct;
     }
 
-    public Product(Integer idProduct, String name, byte[] imagePath, String information, BigDecimal unitCost, int stock, String departament) {
+    public Product(Integer idProduct, String name, String imagePath, String information, BigDecimal unitCost, int stock, String departament) {
         this.idProduct = idProduct;
         this.name = name;
         this.imagePath = imagePath;
@@ -106,11 +106,11 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public byte[] getImagePath() {
+    public String getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(byte[] imagePath) {
+    public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
 
