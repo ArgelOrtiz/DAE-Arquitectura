@@ -77,7 +77,14 @@
         <!-- end header inner -->
         <!-- end header -->
         <!-- banner -->
-        <section class="banner_main">
+        <section class="banner_main" 
+                 <% 
+                    if (sesion.getAttribute("privilegio").toString() != "Admin") {
+                            out.print("hidden");
+                        }
+                 %>
+                 
+                 >
             <div class="container">
                 <div class="row d_flex">
                     <div class="col-md-5">
