@@ -3,6 +3,11 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.util.List;
+import app.models.User;
+import javax.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 public final class users_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -11,10 +16,20 @@ public final class users_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List<String> _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
+
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _jspx_tagPool_c_forEach_var_items.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -41,6 +56,13 @@ public final class users_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
@@ -127,19 +149,27 @@ public final class users_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-sm-6\">\n");
       out.write("                                                <label>Identificador</label>\n");
-      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"id_user\">\n");
+      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"id_user\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${infoUser.getIdUser()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-sm-6\">\n");
       out.write("                                                <label>Usuario</label>\n");
-      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"user\">\n");
+      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"user\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${infoUser.getNickname()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-sm-6\">\n");
       out.write("                                                <label>Primer apellido</label>\n");
-      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"f_name\">\n");
+      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"f_name\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${infoUser.getFirstName()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-sm-6\">\n");
       out.write("                                                <label>Segundo apellido</label>\n");
-      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"l_name\">\n");
+      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"l_name\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${infoUser.getLastName()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-sm-6\">\n");
       out.write("                                                <label>Contraseña</label>\n");
@@ -147,11 +177,15 @@ public final class users_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-sm-6\">\n");
       out.write("                                                <label>Correo electrónico</label>\n");
-      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"email\">\n");
+      out.write("                                                <input class=\"contactus\" type=\"text\" name=\"email\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${infoUser.getEmail()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-sm-6\">\n");
       out.write("                                                <label>Teléfono celular</label>\n");
-      out.write("                                                <input class=\"contactus\" type=\"number\" name=\"cellphone\">\n");
+      out.write("                                                <input class=\"contactus\" type=\"number\" name=\"cellphone\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${infoUser.getCellphone()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-sm-6\">\n");
       out.write("                                                <label>Tipo de usuario</label>\n");
@@ -191,7 +225,6 @@ public final class users_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <tr>\n");
       out.write("                                <th>Id</th>\n");
       out.write("                                <th>User</th>\n");
-      out.write("                                <th>Contraseña</th>\n");
       out.write("                                <th>Tipo usuario</th>\n");
       out.write("                                <th>Nombre/s</th>\n");
       out.write("                                <th>Apellidos</th>\n");
@@ -201,83 +234,75 @@ public final class users_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </tr>\n");
       out.write("                        </thead>\n");
       out.write("                        <tbody>\n");
-      out.write("                            <tr>\n");
-      out.write("                                <th>1</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th><img class=\"btnEliminar\" src=\"resources/images/icons/boton-eliminar.png\" alt=\"#\" /></th>\n");
-      out.write("                            </tr>\n");
-      out.write("                            <tr>\n");
-      out.write("                                <th>1</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th><img class=\"btnEliminar\" src=\"resources/images/icons/boton-eliminar.png\" alt=\"#\" /></th>\n");
-      out.write("                            </tr>\n");
-      out.write("                            <tr>\n");
-      out.write("                                <th>1</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th><img class=\"btnEliminar\" src=\"resources/images/icons/boton-eliminar.png\" alt=\"#\" /></th>\n");
-      out.write("                            </tr>\n");
-      out.write("                            <tr>\n");
-      out.write("                                <th>1</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th><img class=\"btnEliminar\" src=\"resources/images/icons/boton-eliminar.png\" alt=\"#\" /></th>\n");
-      out.write("                            </tr>\n");
-      out.write("                            <tr>\n");
-      out.write("                                <th>1</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th><img class=\"btnEliminar\" src=\"resources/images/icons/boton-eliminar.png\" alt=\"#\" /></th>\n");
-      out.write("                            </tr>\n");
-      out.write("                            <tr>\n");
-      out.write("                                <th>1</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th><img class=\"btnEliminar\" src=\"resources/images/icons/boton-eliminar.png\" alt=\"#\" /></th>\n");
-      out.write("                            </tr>\n");
-      out.write("                            <tr>\n");
-      out.write("                                <th>1</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th>Cell</th>\n");
-      out.write("                                <th><img class=\"btnEliminar\" src=\"resources/images/icons/boton-eliminar.png\" alt=\"#\" /></th>\n");
-      out.write("                            </tr>\n");
+      out.write("                            ");
+ 
+                                EntityManagerFactory emf = Persistence.createEntityManagerFactory("DAE-ArquitecturaPU");
+                                EntityManager em = emf.createEntityManager();
+                                List<User> users = em.createQuery("SELECT u FROM User u").getResultList();
+                            
+      out.write("\n");
+      out.write("                            ");
+      //  c:forEach
+      org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+      _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
+      _jspx_th_c_forEach_0.setParent(null);
+      _jspx_th_c_forEach_0.setVar("item");
+      _jspx_th_c_forEach_0.setItems(users);
+      int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
+      try {
+        int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
+        if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+          do {
+            out.write("\n");
+            out.write("                            <tr>\n");
+            out.write("                                <th>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getIdUser()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</th>\n");
+            out.write("                                <th>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getNickname()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</th>\n");
+            out.write("                                <th>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getUserType()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</th>\n");
+            out.write("                                <th>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getFirstName()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</th>\n");
+            out.write("                                <th>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getLastName()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</th>\n");
+            out.write("                                <th>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getCellphone()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</th>\n");
+            out.write("                                <th>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getEmail()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</th>\n");
+            out.write("                                <th>\n");
+            out.write("                                    <form method=\"POST\" action=\"UserDelete\">\n");
+            out.write("                                        <input type=\"hidden\" name=\"idTabla\" value=\"");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getIdUser()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("\">\n");
+            out.write("                                        <button class=\"btn btn-outline-danger btn-sm\" name=\"btnEliminar\">X</button>\n");
+            out.write("                                    </form>\n");
+            out.write("                                </th>\n");
+            out.write("                            </tr>\n");
+            out.write("                            ");
+            int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
+            if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+              break;
+          } while (true);
+        }
+        if (_jspx_th_c_forEach_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+          return;
+        }
+      } catch (Throwable _jspx_exception) {
+        while (_jspx_push_body_count_c_forEach_0[0]-- > 0)
+          out = _jspx_page_context.popBody();
+        _jspx_th_c_forEach_0.doCatch(_jspx_exception);
+      } finally {
+        _jspx_th_c_forEach_0.doFinally();
+        _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
+      }
+      out.write("\n");
       out.write("                        </tbody>\n");
       out.write("                    </table>\n");
       out.write("                </div>\n");

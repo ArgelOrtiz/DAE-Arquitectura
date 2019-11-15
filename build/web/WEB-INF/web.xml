@@ -8,6 +8,14 @@
         <servlet-name>UserController</servlet-name>
         <servlet-class>app.controllers.UserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TablaUsuarios</servlet-name>
+        <servlet-class>app.controllers.TablaUsuarios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserDelete</servlet-name>
+        <servlet-class>app.controllers.UserDelete</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TablaUsuarios</servlet-name>
+        <url-pattern>/TablaUsuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDelete</servlet-name>
+        <url-pattern>/UserDelete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

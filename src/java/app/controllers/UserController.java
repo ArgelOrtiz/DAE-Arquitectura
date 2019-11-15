@@ -3,6 +3,7 @@ package app.controllers;
 import app.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -25,6 +26,9 @@ public class UserController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String action = (String)request.getParameter("action");
+            List<User> users = em.createQuery("SELECT u FROM User u").getResultList();
+            out.println(users);
+            request.setAttribute("allUsers", users);
             
             switch(action){
                 case "Login":
@@ -73,13 +77,42 @@ public class UserController extends HttpServlet {
                         em.persist(userCreate);
                         tx.commit();
                         out.println("Se insertó el usuario de forma éxitosa");
+                        RequestDispatcher vista = request.getRequestDispatcher("users.jsp");
+                        vista.forward(request, response);
                     }catch(Exception e){
                         tx.rollback();
                         out.println(e);
                     }
                     break;
                 case "Update":
+                    int idU = Integer.parseInt(request.getParameter("id_user"));                    
+                    User userFindU = em.find(User.class, idU);
                     
+                    String userU = (String)request.getParameter("user");
+                    String f_nameU = (String)request.getParameter("f_name");
+                    String l_nameU = (String)request.getParameter("l_name");
+                    String passU = (String)request.getParameter("password");
+                    String mailU = (String)request.getParameter("email");
+                    String cellphoneU = (String)request.getParameter("cellphone");
+                    String user_typeU = (String)request.getParameter("user_type");
+                    
+                    tx.begin();
+                    try{
+                        userFindU.setNickname(userU);
+                        userFindU.setFirstName(f_nameU);
+                        userFindU.setLastName(l_nameU);
+                        userFindU.setPassword(passU);
+                        userFindU.setEmail(mailU);
+                        userFindU.setCellphone(cellphoneU);
+                        userFindU.setUserType(user_typeU);
+                        tx.commit();
+                        System.out.println("El registro se modificó con éxito");
+                        RequestDispatcher vista = request.getRequestDispatcher("users.jsp");
+                        vista.forward(request, response);
+                    }catch(Exception e){
+                        tx.rollback();
+                        System.out.println(e);
+                    }
                     break;
                 case "Read":
                     int id = Integer.parseInt(request.getParameter("id_user"));                    
@@ -87,15 +120,17 @@ public class UserController extends HttpServlet {
                     tx.begin();
                     try{
                         tx.commit();
-                        /*request.setAttribute("infoUser", userFind);
+                        request.setAttribute("infoUser", userFind);
                         RequestDispatcher vista = request.getRequestDispatcher("users.jsp");
-                        vista.forward(request, response);*/
+                        vista.forward(request, response);
                     }catch(Exception e){
                         tx.rollback();
                         System.out.println(e);
                     }
                     break;
             }
+            
+            
         }
     }
 

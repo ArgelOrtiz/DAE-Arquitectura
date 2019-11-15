@@ -1,7 +1,11 @@
+<%@page import="java.util.List"%>
+<%@page import="app.models.User"%>
 <%@page import="javax.persistence.Persistence"%>
 <%@page import="javax.persistence.EntityManager"%>
 <%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,10 +20,6 @@
         <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.min.css">
     </head>
     <body class="main-layout">
-        <%
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("SemestreJPAPU");
-            EntityManager em = emf.createEntityManager();
-        %>
         <!-- loader  -->
         <div class="loader_bg">
             <div class="loader"><img src="resources/images/loading.gif" alt="#" /></div>
@@ -91,19 +91,19 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Identificador</label>
-                                                <input class="contactus" type="text" name="id_user">
+                                                <input class="contactus" type="text" name="id_user" value="${infoUser.getIdUser()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Usuario</label>
-                                                <input class="contactus" type="text" name="user" value="">
+                                                <input class="contactus" type="text" name="user" value="${infoUser.getNickname()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Primer apellido</label>
-                                                <input class="contactus" type="text" name="f_name">
+                                                <input class="contactus" type="text" name="f_name" value="${infoUser.getFirstName()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Segundo apellido</label>
-                                                <input class="contactus" type="text" name="l_name">
+                                                <input class="contactus" type="text" name="l_name" value="${infoUser.getLastName()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Contraseña</label>
@@ -111,11 +111,11 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Correo electrónico</label>
-                                                <input class="contactus" type="text" name="email">
+                                                <input class="contactus" type="text" name="email" value="${infoUser.getEmail()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Teléfono celular</label>
-                                                <input class="contactus" type="number" name="cellphone">
+                                                <input class="contactus" type="number" name="cellphone" value="${infoUser.getCellphone()}">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Tipo de usuario</label>
@@ -155,7 +155,6 @@
                             <tr>
                                 <th>Id</th>
                                 <th>User</th>
-                                <th>Contraseña</th>
                                 <th>Tipo usuario</th>
                                 <th>Nombre/s</th>
                                 <th>Apellidos</th>
@@ -165,83 +164,28 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% 
+                                EntityManagerFactory emf = Persistence.createEntityManagerFactory("DAE-ArquitecturaPU");
+                                EntityManager em = emf.createEntityManager();
+                                List<User> users = em.createQuery("SELECT u FROM User u").getResultList();
+                            %>
+                            <c:forEach var="item" items="<%=users%>">
                             <tr>
-                                <th>1</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
+                                <th>${item.getIdUser()}</th>
+                                <th>${item.getNickname()}</th>
+                                <th>${item.getUserType()}</th>
+                                <th>${item.getFirstName()}</th>
+                                <th>${item.getLastName()}</th>
+                                <th>${item.getCellphone()}</th>
+                                <th>${item.getEmail()}</th>
+                                <th>
+                                    <form method="POST" action="UserDelete">
+                                        <input type="hidden" name="idTabla" value="${item.getIdUser()}">
+                                        <button class="btn btn-outline-danger btn-sm" name="btnEliminar">X</button>
+                                    </form>
+                                </th>
                             </tr>
-                            <tr>
-                                <th>1</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th>Cell</th>
-                                <th><img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" /></th>
-                            </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>
