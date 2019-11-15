@@ -1,3 +1,6 @@
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +16,11 @@
         <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.min.css">
     </head>
     <body class="main-layout">
+        
+        <%
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("DAE-ArquitecturaPU");
+            EntityManager em = emf.createEntityManager();
+        %>
         <!-- loader  -->
         <div class="loader_bg">
             <div class="loader"><img src="resources/images/loading.gif" alt="#" /></div>
@@ -77,7 +85,7 @@
                         <div id="Products" class="products">
                             <div class="container">
                                 <div id="form-products">
-                                    <form class="main_form" method="POST">
+                                    <form class="main_form" method="POST" action="./ProductController">
                                         <div class="row">
                                             <div class="col-sm-12 main_title">
                                                 <span>Producto</span>
@@ -99,7 +107,7 @@
                                                 <input class="contactus" type="text" name="departamento">
                                             </div>
                                             <div class="col-sm-12">
-                                                <label>Descripción dle producto</label>
+                                                <label>Descripción del producto</label>
                                                 <input class="textarea" type="text" name="descripcion_producto">
                                             </div>
                                             <div class="col-sm-6">
@@ -111,9 +119,9 @@
                                                 <input class="contactus" type="number" name="existencia">
                                             </div>
                                             <div class="col-sm-12">
-                                                <button id="btnBuscar" class="btnBlack">Buscar</button>
-                                                <button id="btnInsertar" class="btnBlack">Insertar</button>
-                                                <button id="btnModificar" class="btnBlack">Modificar</button>
+                                                <button id="btnBuscar" class="btnBlack" value ="Read" name ="action">Buscar</button>
+                                                <button id="btnInsertar" class="btnBlack" value ="Create" name ="action">Insertar</button>
+                                                <button id="btnModificar" class="btnBlack" value ="Update" name ="action">Modificar</button>
                                             </div>
                                         </div>
                                     </form>
