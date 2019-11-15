@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package app.controllers;
 
 import app.models.Product;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import javax.persistence.EntityManager;
@@ -18,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 
 public class ProductController extends HttpServlet {
@@ -35,28 +32,27 @@ public class ProductController extends HttpServlet {
             
             switch(action){   
                 case "Create":
-                    String name = (String)request.getParameter("nombre_producto");
-                    String image_path = (String)request.getParameter("ruta_imagen");
-                    String information = (String)request.getParameter("descripcion_producto");
-                    BigDecimal unit_cost = new BigDecimal(request.getParameter("costo_unidad"));
-                    int stock = (Integer.parseInt(request.getParameter("existencia")));
-                    String departament = (String)request.getParameter("departamento");
+                    String name = (String)request.getParameter("product_name");
+                    Part file = request.getPart("image_path");
+                    String information = (String)request.getParameter("description");
+                    BigDecimal unit_cost = new BigDecimal(request.getParameter("unitCost"));
+                    int stock = (Integer.parseInt(request.getParameter("stock")));
+                    String departament = (String)request.getParameter("departament");
                     
                     tx.begin();
                     try{
                         Query query = em.createQuery("SELECT Max(p.idProduct) FROM Product p");
                         
-                        //Cuando se quiere insertar un producto en una tabla vacía el getSingleResult devuelve nulo lo cual provoca una excepción
                         if(query.getSingleResult()== null){
                             lastId = (Integer)1;
                         }else{
-                        lastId = (Integer) query.getSingleResult();
-                        lastId++;
+                            lastId = (Integer) query.getSingleResult();
+                            lastId++;
                         }
-                        Product createProduct = new Product(lastId, name, image_path, information, unit_cost, stock, departament);
-                        out.println(createProduct.getIdProduct());
+
+                        //Product createProduct = new Product(lastId, name, , information, unit_cost, stock, departament);
                         
-                        em.persist(createProduct);
+                        //em.persist(createProduct);
                         tx.commit();
                         out.println("Se insertó el producto de forma exitosa");
                     }catch(Exception e){
@@ -67,18 +63,6 @@ public class ProductController extends HttpServlet {
                 case "Update":
                     break;
                 case "Read":
-                    int id = Integer.parseInt(request.getParameter("id_user"));                    
-                    Product findProduct = em.find(Product.class, id);
-                    tx.begin();
-                    try{
-                        tx.commit();
-                        /*request.setAttribute("infoUser", userFind);
-                        RequestDispatcher vista = request.getRequestDispatcher("users.jsp");
-                        vista.forward(request, response);*/
-                    }catch(Exception e){
-                        tx.rollback();
-                        System.out.println(e);
-                    }
                     break;
             }
         }

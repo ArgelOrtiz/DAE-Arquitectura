@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -199,7 +200,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <label>Contraseña</label>
-                                        <input class="contactus" type="text" name="passwordI">
+                                        <input class="contactus" type="password" name="passwordI">
                                     </div>
                                     <div class="col-sm-12">
                                         <button class="btnBlack" value="Login" name="action">Ingresar</button>

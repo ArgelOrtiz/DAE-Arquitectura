@@ -1,10 +1,5 @@
-<%-- 
-    Document   : sales
-    Created on : 04-nov-2019, 22:57:20
-    Author     : argel
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true" %>
 <!DOCTYPE html>
 <html>
     <head>

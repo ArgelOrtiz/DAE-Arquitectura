@@ -4,6 +4,7 @@
 <%@page import="javax.persistence.EntityManager"%>
 <%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true" %>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -57,7 +58,7 @@
                                             <a class="nav-link" href="#">Ver mi carrito</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#contact">Iniciar sesión</a>
+                                            <a class="nav-link" href="index.jsp?cerrar=true">Cerrar sesión</a>
                                         </li>
                                     </ul>
                                 </div>

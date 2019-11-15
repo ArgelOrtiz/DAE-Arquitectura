@@ -1,4 +1,8 @@
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +17,16 @@
         <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.min.css">
     </head>
     <body class="main-layout">
+        <%
+            HttpSession sesion = request.getSession();
+            if(sesion.getAttribute("user") != null && sesion.getAttribute("privilegio") != null){
+                String user = sesion.getAttribute("user").toString();
+                String privilegio = sesion.getAttribute("privilegio").toString();
+            } else {
+                out.print("<script>location.replace('index.jsp');</script>");
+            }
+        %>
+        
         <!-- loader  -->
         <div class="loader_bg">
             <div class="loader"><img src="resources/images/loading.gif" alt="#" /></div>
@@ -50,7 +64,7 @@
                                             <a class="nav-link" href="#">Ver mi carrito</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#contact">Iniciar sesión</a>
+                                            <a class="nav-link" href="index.jsp?cerrar=true">Cerrar sesión</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -77,7 +91,7 @@
                         <div id="Products" class="products">
                             <div class="container">
                                 <div id="form-products">
-                                    <form class="main_form" method="POST">
+                                    <form class="main_form" method="POST" action="./ProductController" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-sm-12 main_title">
                                                 <span>Producto</span>
@@ -88,32 +102,32 @@
                                             </div>
                                             <div class="col-sm-12">
                                                 <label>Imagen del producto</label>
-                                                <input class="contactus" type="file" name="ruta_imagen">
+                                                <input class="contactus" type="file" name="image_path">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Nombre del producto</label>
-                                                <input class="contactus" type="text" name="nombre_producto">
+                                                <input class="contactus" type="text" name="product_name">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Clave del departamento</label>
-                                                <input class="contactus" type="text" name="departamento">
+                                                <input class="contactus" type="text" name="departament">
                                             </div>
                                             <div class="col-sm-12">
-                                                <label>Descripción dle producto</label>
-                                                <input class="textarea" type="text" name="descripcion_producto">
+                                                <label>Descripción del producto</label>
+                                                <input class="textarea" type="text" name="description">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Precio unitario</label>
-                                                <input class="contactus" type="number" name="costo_unidad">
+                                                <input class="contactus" type="number" name="unitCost">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Existencia</label>
-                                                <input class="contactus" type="number" name="existencia">
+                                                <input class="contactus" type="number" name="stock">
                                             </div>
                                             <div class="col-sm-12">
-                                                <button id="btnBuscar" class="btnBlack">Buscar</button>
-                                                <button id="btnInsertar" class="btnBlack">Insertar</button>
-                                                <button id="btnModificar" class="btnBlack">Modificar</button>
+                                                <button id="btnBuscar" class="btnBlack" value="Read" name ="action">Buscar</button>
+                                                <button id="btnInsertar" class="btnBlack" value="Create" name ="action">Insertar</button>
+                                                <button id="btnModificar" class="btnBlack" value="Update" name ="action">Modificar</button>
                                             </div>
                                         </div>
                                     </form>

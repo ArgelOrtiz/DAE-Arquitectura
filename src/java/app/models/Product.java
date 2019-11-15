@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package app.models;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -25,10 +21,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author jessi
- */
 @Entity
 @Table(name = "products")
 @XmlRootElement
@@ -58,7 +50,7 @@ public class Product implements Serializable {
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "image_path")
-    private String imagePath;
+    private byte[] imagePath;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -88,7 +80,7 @@ public class Product implements Serializable {
         this.idProduct = idProduct;
     }
 
-    public Product(Integer idProduct, String name, String imagePath, String information, BigDecimal unitCost, int stock, String departament) {
+    public Product(Integer idProduct, String name, byte[] imagePath, String information, BigDecimal unitCost, int stock, String departament) {
         this.idProduct = idProduct;
         this.name = name;
         this.imagePath = imagePath;
@@ -114,11 +106,11 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public String getImagePath() {
+    public byte[] getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) {
+    public void setImagePath(byte[] imagePath) {
         this.imagePath = imagePath;
     }
 

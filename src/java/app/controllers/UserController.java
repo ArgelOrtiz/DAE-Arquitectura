@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class UserController extends HttpServlet {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("DAE-ArquitecturaPU");
@@ -27,12 +28,27 @@ public class UserController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String action = (String)request.getParameter("action");
             List<User> users = em.createQuery("SELECT u FROM User u").getResultList();
-            out.println(users);
             request.setAttribute("allUsers", users);
             
             switch(action){
                 case "Login":
+                    String nicknameL = (String)request.getParameter("userI");
+                    String passwordL = (String)request.getParameter("passwordI");
                     
+                    Query queryL = em.createQuery("SELECT u.userType FROM User u WHERE u.nickname='"+nicknameL+"' AND u.password='"+passwordL+"'");
+                    String a = queryL.getSingleResult().toString();
+                    switch(a){
+                        case "Admin":
+                            HttpSession sesion = request.getSession();
+                            sesion.setAttribute("user", nicknameL);
+                            sesion.setAttribute("privilegio", a);
+                            response.sendRedirect("products.jsp");
+                            break;
+                        case "Customer":
+                            break;
+                    }
+                    
+                    out.println(a);
                     break;
                 case "Register":
                     String nickname = (String)request.getParameter("userR");
@@ -42,8 +58,14 @@ public class UserController extends HttpServlet {
                     tx.begin();
                     try{
                         Query query = em.createQuery("SELECT Max(u.idUser) FROM User u");
-                        int lastId = (Integer) query.getSingleResult();
-                        lastId++;
+                        int lastId;
+                        
+                        if(query.getSingleResult() == null){
+                            lastId = (Integer)1;
+                        }else{
+                            lastId = (Integer) query.getSingleResult();
+                            lastId++;
+                        }
                         
                         User userCreate = new User(lastId, nickname, password,"Customer","","","",email);
                         out.println(userCreate.getIdUser());
