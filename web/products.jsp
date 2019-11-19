@@ -111,7 +111,7 @@
                         <div id="Products" class="products">
                             <div class="container">
                                 <div id="form-products">
-                                    <form class="main_form" method="POST" action="./ProductController">
+                                    <form class="main_form" method="POST" action="./ProductController" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-sm-12 main_title">
                                                 <span>Producto</span>
@@ -122,7 +122,7 @@
                                             </div>
                                             <div class="col-sm-12">
                                                 <label>Imagen del producto</label>
-                                                <input class="contactus" type="text" name="image_path" value="${infoProduct.getImagePath()}">
+                                                <input class="contactus" type="file" name="image_path" size="20" value="kjmnhmj">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Nombre del producto</label>
