@@ -82,9 +82,19 @@
         <!-- banner -->
         <section class="banner_main" 
                  <% 
-                    if (sesion.getAttribute("privilegio").toString() != "Admin") {
+                    HttpSession sesionP = request.getSession();
+                    String user = sesion.getAttribute("user").toString();
+                    String privilegio = sesion.getAttribute("privilegio").toString();
+                    
+                    if(user != null && privilegio != null){
+                        if(!privilegio.equals("Admin")){
                             out.print("hidden");
+                        } else {
+                            out.print("");
                         }
+                    } else {
+                        out.print("<script>location.replace('index.jsp');</script>");
+                    }
                  %>
                  
                  >

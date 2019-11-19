@@ -35,18 +35,11 @@ public class UserController extends HttpServlet {
                     
                     Query queryL = em.createQuery("SELECT u.userType FROM User u WHERE u.nickname='"+nicknameL+"' AND u.password='"+passwordL+"'");
                     String a = queryL.getSingleResult().toString();
-                    switch(a){
-                        case "Admin":
-                            HttpSession sesion = request.getSession();
-                            sesion.setAttribute("user", nicknameL);
-                            sesion.setAttribute("privilegio", a);
-                            response.sendRedirect("products.jsp");
-                            break;
-                        case "Customer":
-                            break;
-                    }
-                    
                     out.println(a);
+                    HttpSession sesion = request.getSession();
+                    sesion.setAttribute("user", nicknameL);
+                    sesion.setAttribute("privilegio", a);
+                    response.sendRedirect("products.jsp");
                     break;
                 case "Register":
                     String nickname = (String)request.getParameter("userR");
