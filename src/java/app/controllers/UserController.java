@@ -64,6 +64,8 @@ public class UserController extends HttpServlet {
                         em.persist(userCreate);
                         tx.commit();
                         out.println("Se insertó el usuario de forma éxitosa");
+                        
+                        response.sendRedirect("index.jsp");
                     }catch(Exception e){
                         tx.rollback();
                         out.println(e);
