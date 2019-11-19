@@ -31,7 +31,7 @@
                             <div class="full">
                                 <div class="center-desk">
                                     <div class="logo">
-                                        <a href="index.html"><img src="resources/images/logo.png" alt="#" /></a>
+                                        <a href="index.html">TextStore</a>
                                     </div>
                                 </div>
                             </div>
