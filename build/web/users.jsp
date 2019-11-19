@@ -21,6 +21,15 @@
         <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.min.css">
     </head>
     <body class="main-layout">
+        <%
+            HttpSession sesion = request.getSession();
+            if(sesion.getAttribute("user") != null && sesion.getAttribute("privilegio") != null){
+                String user = sesion.getAttribute("user").toString();
+                String privilegio = sesion.getAttribute("privilegio").toString();
+            } else {
+                out.print("<script>location.replace('index.jsp');</script>");
+            }
+        %>
         <!-- loader  -->
         <div class="loader_bg">
             <div class="loader"><img src="resources/images/loading.gif" alt="#" /></div>
@@ -52,10 +61,13 @@
                                             <a class="nav-link" href="#">Inicio</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#service">Nuestros productos</a>
+                                            <a class="nav-link" href="products.jsp">Nuestros productos</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#">Ver mi carrito</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="users.jsp">Perfil</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="index.jsp?cerrar=true">Cerrar sesión</a>
@@ -141,7 +153,23 @@
         </section>
         <!-- end banner -->
         <!-- Table users -->
-        <div id="UsersT" class="users">
+        <div id="UsersT" class="users" 
+            <% 
+                HttpSession sesionP = request.getSession();
+                String user = sesion.getAttribute("user").toString();
+                String privilegio = sesion.getAttribute("privilegio").toString();
+
+                if(user != null && privilegio != null){
+                    if(!privilegio.equals("Admin")){
+                        out.print("hidden");
+                    } else {
+                        out.print("");
+                    }
+                } else {
+                    out.print("<script>location.replace('index.jsp');</script>");
+                }
+             %>
+            >
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">

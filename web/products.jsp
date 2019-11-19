@@ -67,6 +67,9 @@
                                             <a class="nav-link" href="#">Ver mi carrito</a>
                                         </li>
                                         <li class="nav-item">
+                                            <a class="nav-link" href="users.jsp">Perfil</a>
+                                        </li>
+                                        <li class="nav-item">
                                             <a class="nav-link" href="index.jsp?cerrar=true">Cerrar sesión</a>
                                         </li>
                                     </ul>
