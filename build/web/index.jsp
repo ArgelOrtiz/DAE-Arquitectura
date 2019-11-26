@@ -42,7 +42,7 @@
                             <div class="full">
                                 <div class="center-desk">
                                     <div class="logo">
-                                        <a href="index.jsp"><img src="resources/images/logo.png" alt="#" /></a>
+                                        <a href="index.jsp">TextStore</a>
                                     </div>
                                 </div>
                             </div>
