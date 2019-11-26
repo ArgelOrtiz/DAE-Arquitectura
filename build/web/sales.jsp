@@ -15,7 +15,7 @@
 
     </head>
     <body class="main-layout">
-        <!-- loader  
+        <!-- loader -->
         <div class="loader_bg">
             <div class="loader"><img src="resources/images/loading.gif" alt="#" /></div>
         </div>

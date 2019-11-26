@@ -3,6 +3,11 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.util.List;
+import app.models.Product;
+import javax.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -11,10 +16,20 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List<String> _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
+
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _jspx_tagPool_c_forEach_var_items.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -41,6 +56,12 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
@@ -98,9 +119,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                            <a class=\"nav-link\" href=\"#ProductsH\">Nuestros productos</a>\r\n");
       out.write("                                        </li>\r\n");
       out.write("                                        <li class=\"nav-item\">\r\n");
-      out.write("                                            <a class=\"nav-link\" href=\"#\">Ver mi carrito</a>\r\n");
-      out.write("                                        </li>\r\n");
-      out.write("                                        <li class=\"nav-item\">\r\n");
       out.write("                                            <a class=\"nav-link\" href=\"#Login\">Iniciar sesión</a>\r\n");
       out.write("                                        </li>\r\n");
       out.write("                                    </ul>\r\n");
@@ -141,78 +159,66 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"col-md-12\">\r\n");
       out.write("                        <div class=\"titlepage\">\r\n");
       out.write("                            <h2>Nuevos productos</h2>\r\n");
-      out.write("                            <p>Lorem ipsum dolor sittem ametamngcing elit, per sed do eiusmoad <br>\r\n");
-      out.write("                                teimpor sittem elit inuning ut sed.\r\n");
-      out.write("                            </p>\r\n");
+      out.write("                            <p>Aquí puede ver nuestros productos <br> ¿Quieres adquirir alguno? Registrate</p>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
       out.write("                <div class=\"row\">\r\n");
-      out.write("                    <div class=\"col-xl-4 col-lg-4 col-md-4 col-sm-12\">\r\n");
-      out.write("                        <!-- Modal prueba -->\r\n");
-      out.write("                        <div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\r\n");
-      out.write("                            <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n");
-      out.write("                                <div class=\"modal-content\">\r\n");
-      out.write("                                    <div class=\"modal-header\">\r\n");
-      out.write("                                        <h3 class=\"modal-title\" id=\"exampleModalLabel\">The Outer Worlds - $500</h3>\r\n");
-      out.write("                                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\r\n");
-      out.write("                                            <span aria-hidden=\"true\">&times;</span>\r\n");
-      out.write("                                        </button>\r\n");
-      out.write("                                    </div>\r\n");
-      out.write("                                    <div class=\"modal-body\">\r\n");
-      out.write("                                        <img src=\"resources/images/01.png\" alt=\"#\" />\r\n");
-      out.write("                                        <p>Eres Milo y Lola, los mejores amigos que han fallecido recientemente y que de repente se encuentran mirando a la eternidad en el infierno. Pero hay un vacío legal: superen a Satán y les permitirá volver a la Tierra.</p>\r\n");
-      out.write("                                    </div>\r\n");
-      out.write("                                    <div class=\"modal-footer\">\r\n");
-      out.write("                                        <input class=\"contactus\" type=\"number\">\r\n");
-      out.write("                                        <button type=\"button\" class=\"btnBlack\">Agregar al carrito</button>\r\n");
-      out.write("                                    </div>\r\n");
-      out.write("                                </div>\r\n");
-      out.write("                            </div>\r\n");
-      out.write("                        </div>\r\n");
-      out.write("                        <!-- Fin modal prueba -->\r\n");
-      out.write("                        <div class=\"products-box\">\r\n");
-      out.write("                            <img src=\"resources/images/01.png\" alt=\"#\" />\r\n");
-      out.write("                            <h3>Afterparty</h3>\r\n");
-      out.write("                            <button type=\"button\" class=\"btnBlack\" data-toggle=\"modal\" data-target=\"#exampleModal\">Ver información</button>\r\n");
-      out.write("                        </div>\r\n");
+      out.write("                    ");
+ 
+                        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DAE-ArquitecturaPU");
+                        EntityManager em = emf.createEntityManager();
+                        List<Product> products = em.createQuery("SELECT p FROM Product p").getResultList();
+                    
+      out.write("\r\n");
+      out.write("                    ");
+      //  c:forEach
+      org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+      _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
+      _jspx_th_c_forEach_0.setParent(null);
+      _jspx_th_c_forEach_0.setVar("item");
+      _jspx_th_c_forEach_0.setItems(products);
+      int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
+      try {
+        int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
+        if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+          do {
+            out.write("\r\n");
+            out.write("                        <div class=\"col-xl-4 col-lg-4 col-md-4 col-sm-12\">\r\n");
+            out.write("                            <div class=\"products-box\">\r\n");
+            out.write("                                <h1>$ ");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getUnitCost()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</h1>\r\n");
+            out.write("                                <img src=\"resources/images/01.png\" alt=\"#\" />\r\n");
+            out.write("                                <h3>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getName()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</h3>\r\n");
+            out.write("                                <p>");
+            out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${item.getInformation()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+            out.write("</p>\r\n");
+            out.write("                            </div>\r\n");
+            out.write("                        </div>\r\n");
+            out.write("                    ");
+            int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
+            if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+              break;
+          } while (true);
+        }
+        if (_jspx_th_c_forEach_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+          return;
+        }
+      } catch (Throwable _jspx_exception) {
+        while (_jspx_push_body_count_c_forEach_0[0]-- > 0)
+          out = _jspx_page_context.popBody();
+        _jspx_th_c_forEach_0.doCatch(_jspx_exception);
+      } finally {
+        _jspx_th_c_forEach_0.doFinally();
+        _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
+      }
+      out.write("\r\n");
+      out.write("                    <div class=\"col-12\">\r\n");
+      out.write("                        <a class=\"read_more btnBlack\" href=\"#Login\">Read More</a>\r\n");
       out.write("                    </div>\r\n");
-      out.write("                    <div class=\"col-xl-4 col-lg-4 col-md-4 col-sm-12\">\r\n");
-      out.write("                        <div class=\"products-box\">\r\n");
-      out.write("                            <img src=\"resources/images/02.png\" alt=\"#\" />\r\n");
-      out.write("                            <h3>The Outer Worlds</h3>\r\n");
-      out.write("                            <button type=\"button\" class=\"btnBlack\">Ver información</button>\r\n");
-      out.write("                        </div>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                    <div class=\"col-xl-4 col-lg-4 col-md-4 col-sm-12\">\r\n");
-      out.write("                        <div class=\"products-box\">\r\n");
-      out.write("                            <img src=\"resources/images/03.png\" alt=\"#\" />\r\n");
-      out.write("                            <h3>ReadySet Heroes</h3>\r\n");
-      out.write("                            <button type=\"button\" class=\"btnBlack\">Ver información</button>\r\n");
-      out.write("                        </div>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                    <div class=\"col-xl-4 col-lg-4 col-md-4 col-sm-12\">\r\n");
-      out.write("                        <div class=\"products-box\">\r\n");
-      out.write("                            <img src=\"resources/images/04.png\" alt=\"#\" />\r\n");
-      out.write("                            <h3>Ruiner</h3>\r\n");
-      out.write("                            <button type=\"button\" class=\"btnBlack\">Ver información</button>\r\n");
-      out.write("                        </div>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                    <div class=\"col-xl-4 col-lg-4 col-md-4 col-sm-12\">\r\n");
-      out.write("                        <div class=\"products-box\">\r\n");
-      out.write("                            <img src=\"resources/images/05.png\" alt=\"#\" />\r\n");
-      out.write("                            <h3>Control</h3>\r\n");
-      out.write("                            <button type=\"button\" class=\"btnBlack\">Ver información</button>\r\n");
-      out.write("                        </div>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                    <div class=\"col-xl-4 col-lg-4 col-md-4 col-sm-12\">\r\n");
-      out.write("                        <div class=\"products-box\">\r\n");
-      out.write("                            <img src=\"resources/images/06.png\" alt=\"#\" />\r\n");
-      out.write("                            <h3>Cyberpunk 2077</h3>\r\n");
-      out.write("                            <button type=\"button\" class=\"btnBlack\">Ver información</button>\r\n");
-      out.write("                        </div>\r\n");
-      out.write("                    </div>\r\n");
-      out.write("                    <a class=\"read_more btnBlack\" href=\"#\">Read More</a>\r\n");
       out.write("                </div>\r\n");
       out.write("            </div>\r\n");
       out.write("        </div>\r\n");
@@ -290,10 +296,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <div class=\"cont\">\r\n");
       out.write("                                <h3>Contactanos</h3>\r\n");
       out.write("                                <span>Te dejamos la información para que puedas hacernos llegar tus opiniones.</span>\r\n");
-      out.write("                                <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, \r\n");
-      out.write("                                    quissed do eiusmod tempor incididunt ut labore et dolore \r\n");
-      out.write("                                    magna aliqua. Ut enim ad minim veniam, quis  \r\n");
-      out.write("                                </p>\r\n");
+      out.write("                                <p>Telefonos: 4777026925 | 4778547965 <br> Correo electrónico: empresa@hotmail.com</p>\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </div>\r\n");

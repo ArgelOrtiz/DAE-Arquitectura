@@ -3,7 +3,6 @@ package app.controllers;
 import app.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;

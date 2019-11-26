@@ -1,5 +1,11 @@
+<%@page import="java.util.List"%>
+<%@page import="app.models.Product"%>
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -55,9 +61,6 @@
                                             <a class="nav-link" href="#ProductsH">Nuestros productos</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">Ver mi carrito</a>
-                                        </li>
-                                        <li class="nav-item">
                                             <a class="nav-link" href="#Login">Iniciar sesión</a>
                                         </li>
                                     </ul>
@@ -98,78 +101,29 @@
                     <div class="col-md-12">
                         <div class="titlepage">
                             <h2>Nuevos productos</h2>
-                            <p>Lorem ipsum dolor sittem ametamngcing elit, per sed do eiusmoad <br>
-                                teimpor sittem elit inuning ut sed.
-                            </p>
+                            <p>Aquí puede ver nuestros productos <br> ¿Quieres adquirir alguno? Registrate</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <!-- Modal prueba -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title" id="exampleModalLabel">The Outer Worlds - $500</h3>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="resources/images/01.png" alt="#" />
-                                        <p>Eres Milo y Lola, los mejores amigos que han fallecido recientemente y que de repente se encuentran mirando a la eternidad en el infierno. Pero hay un vacío legal: superen a Satán y les permitirá volver a la Tierra.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input class="contactus" type="number">
-                                        <button type="button" class="btnBlack">Agregar al carrito</button>
-                                    </div>
-                                </div>
+                    <% 
+                        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DAE-ArquitecturaPU");
+                        EntityManager em = emf.createEntityManager();
+                        List<Product> products = em.createQuery("SELECT p FROM Product p").getResultList();
+                    %>
+                    <c:forEach var="item" items="<%=products%>">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div class="products-box">
+                                <h1>$ ${item.getUnitCost()}</h1>
+                                <img src="resources/images/01.png" alt="#" />
+                                <h3>${item.getName()}</h3>
+                                <p>${item.getInformation()}</p>
                             </div>
                         </div>
-                        <!-- Fin modal prueba -->
-                        <div class="products-box">
-                            <img src="resources/images/01.png" alt="#" />
-                            <h3>Afterparty</h3>
-                            <button type="button" class="btnBlack" data-toggle="modal" data-target="#exampleModal">Ver información</button>
-                        </div>
+                    </c:forEach>
+                    <div class="col-12">
+                        <a class="read_more btnBlack" href="#Login">Read More</a>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img src="resources/images/02.png" alt="#" />
-                            <h3>The Outer Worlds</h3>
-                            <button type="button" class="btnBlack">Ver información</button>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img src="resources/images/03.png" alt="#" />
-                            <h3>ReadySet Heroes</h3>
-                            <button type="button" class="btnBlack">Ver información</button>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img src="resources/images/04.png" alt="#" />
-                            <h3>Ruiner</h3>
-                            <button type="button" class="btnBlack">Ver información</button>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img src="resources/images/05.png" alt="#" />
-                            <h3>Control</h3>
-                            <button type="button" class="btnBlack">Ver información</button>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img src="resources/images/06.png" alt="#" />
-                            <h3>Cyberpunk 2077</h3>
-                            <button type="button" class="btnBlack">Ver información</button>
-                        </div>
-                    </div>
-                    <a class="read_more btnBlack" href="#">Read More</a>
                 </div>
             </div>
         </div>
@@ -247,10 +201,7 @@
                             <div class="cont">
                                 <h3>Contactanos</h3>
                                 <span>Te dejamos la información para que puedas hacernos llegar tus opiniones.</span>
-                                <p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                                    quissed do eiusmod tempor incididunt ut labore et dolore 
-                                    magna aliqua. Ut enim ad minim veniam, quis  
-                                </p>
+                                <p>Telefonos: 4777026925 | 4778547965 <br> Correo electrónico: empresa@hotmail.com</p>
                             </div>
                         </div>
                     </div>

@@ -18,18 +18,19 @@
         <link rel="stylesheet" href="resources/css/style.css">
         <link rel="stylesheet" href="resources/css/responsive.css">
         <link rel="stylesheet" href="resources/css/jquery.mCustomScrollbar.min.css">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </head>
     <body class="main-layout">
         <%
             HttpSession sesion = request.getSession();
-            if(sesion.getAttribute("user") != null && sesion.getAttribute("privilegio") != null){
+            if (sesion.getAttribute("user") != null && sesion.getAttribute("privilegio") != null) {
                 String user = sesion.getAttribute("user").toString();
                 String privilegio = sesion.getAttribute("privilegio").toString();
             } else {
                 out.print("<script>location.replace('index.jsp');</script>");
             }
         %>
-        
+
         <!-- loader  -->
         <div class="loader_bg">
             <div class="loader"><img src="resources/images/loading.gif" alt="#" /></div>
@@ -64,7 +65,7 @@
                                             <a class="nav-link" href="#service">Nuestros productos</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#">Ver mi carrito</a>
+                                            <a id="showModal" class="nav-link" href="#">Ver mi carrito</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="users.jsp">Perfil</a>
@@ -82,24 +83,45 @@
         </header>
         <!-- end header inner -->
         <!-- end header -->
+        <!-- start modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Carrito de compras</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Finalizar compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal -->
         <!-- banner -->
         <section class="banner_main" 
-                 <% 
-                    HttpSession sesionP = request.getSession();
-                    String user = sesion.getAttribute("user").toString();
-                    String privilegio = sesion.getAttribute("privilegio").toString();
-                    
-                    if(user != null && privilegio != null){
-                        if(!privilegio.equals("Admin")){
-                            out.print("hidden");
-                        } else {
-                            out.print("");
-                        }
-                    } else {
-                        out.print("<script>location.replace('index.jsp');</script>");
-                    }
+                 <%
+                     HttpSession sesionP = request.getSession();
+                     String user = sesion.getAttribute("user").toString();
+                     String privilegio = sesion.getAttribute("privilegio").toString();
+                     String controlador = "";
+
+                     if (user != null && privilegio != null) {
+                         if (!privilegio.equals("Admin")) {
+                             out.print("hidden");
+                             controlador = "";
+                         } else {
+                             out.print("");
+                             controlador = "ProductInformation";
+                         }
+                     } else {
+                         out.print("<script>location.replace('index.jsp');</script>");
+                     }
                  %>
-                 
+
                  >
             <div class="container">
                 <div class="row d_flex">
@@ -114,7 +136,7 @@
                         <div id="Products" class="products">
                             <div class="container">
                                 <div id="form-products">
-                                    <form class="main_form" method="POST" action="./ProductController" enctype="multipart/form-data">
+                                    <form class="main_form" method="POST" action="./ProductController">
                                         <div class="row">
                                             <div class="col-sm-12 main_title">
                                                 <span>Producto</span>
@@ -125,7 +147,7 @@
                                             </div>
                                             <div class="col-sm-12">
                                                 <label>Imagen del producto</label>
-                                                <input class="contactus" type="file" name="image_path" size="20" value="kjmnhmj">
+                                                <input class="contactus" type="text" name="image_path" size="20" value="">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Nombre del producto</label>
@@ -173,79 +195,40 @@
                     </div>
                 </div>
                 <div class="row">
-                    <% 
+
+                    <%
                         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DAE-ArquitecturaPU");
                         EntityManager em = emf.createEntityManager();
                         List<Product> products = em.createQuery("SELECT p FROM Product p").getResultList();
                     %>
                     <c:forEach var="item" items="<%=products%>">
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <form method="POST" action="ProductDelete">
-                                <input type="hidden" name="idTabla" value="${item.getIdProduct()}">
-                                <button class="" name="btnEliminar">
-                                    <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png"/>
-                                </button>
-                            </form>
-                            
-                            <img src="resources/images/01.png" alt="#" />
-                            <h3>${item.getName()}</h3>
-                            <form method="POST" action="ProductInformation">
-                                <input type="hidden" name="idTablaP" value="${item.getIdProduct()}">
-                                <a href="#header"><button class="btnBlack" href="#header" name="btnInformacion">Ver información</button></a>
-                            </form>
-                            
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div class="products-box">
+                                <% if (privilegio.equals("Admin")) { %>
+                                <form method="POST" action="ProductDelete">
+                                    <input type="hidden" name="idTabla" value="${item.getIdProduct()}">
+                                    <button class="" name="btnEliminar">
+                                        <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png"/>
+                                    </button>
+                                </form>
+                                <% }%>
+                                <h1>$ ${item.getUnitCost()}</h1>
+                                <img src="resources/images/01.png" alt="#" />
+                                <h3>${item.getName()}</h3>
+                                <p>${item.getInformation()}</p>
+                                <form method="POST" action="<%=controlador%>">
+                                    <input class="idTablaP" type="hidden" name="idTablaP" value="${item.getIdProduct()}">
+                                    <input class="idNameP" type="hidden" name="idTablaP" value="${item.getName()}">
+                                    <% if (privilegio.equals("Admin")) { %>
+                                    <a href="#header"><button class="btnBlack" name="btnInformacion">Ver información</button></a>
+                                    <% } else { %>
+                                    <input type="number" class="unidades">
+                                    <input id="agregar" type="button" class="btnBlack agregar" data-toggle="modal" data-target="#exampleModalCenter" name="btnComprar" value="Comprar">  
+                                    <% }%>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                     </c:forEach>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img src="resources/images/01.png" alt="#" />
-                            <h3>Afterparty</h3>
-                            <a href="#header"><button class="btnBlack" href="#header">Ver información</button></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img src="resources/images/02.png" alt="#" />
-                            <h3>The Outer Worlds</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img src="resources/images/03.png" alt="#" />
-                            <h3>ReadySet Heroes</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img src="resources/images/04.png" alt="#" />
-                            <h3>Ruiner</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img src="resources/images/05.png" alt="#" />
-                            <h3>Control</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div class="products-box">
-                            <img class="btnEliminar" src="resources/images/icons/boton-eliminar.png" alt="#" />
-                            <img src="resources/images/06.png" alt="#" />
-                            <h3>Cyberpunk 2077</h3>
-                            <a type="button" class="btnBlack" href="#header">Ver información</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -276,5 +259,7 @@
         <script src="resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
         <script src="resources/js/custom.js"></script>
         <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+        <!-- propios -->
+        <script src="resources/js/principal.js"></script>
     </body>
 </html>
