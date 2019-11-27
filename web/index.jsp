@@ -32,6 +32,46 @@
             <div class="loader"><img src="resources/images/loading.gif" alt="#" /></div>
         </div>
         <!-- end loader -->
+        
+        
+        
+        <!-- Contador de visitas mediante invocación a web service -->
+    <center>
+        <div class="loader_bg">
+            <div class="loader"><img src="resources/images/loading.gif" alt="#" /></div>
+        </div>
+
+
+
+        <div class="header">
+
+
+            <font color ="white"
+                  <h6>
+                <%
+                    try {
+                        java.lang.Integer hitsCount = (Integer) application.getAttribute("hitCounter");
+
+                        ws.Suma_Service service = new ws.Suma_Service();
+                        ws.Suma port = service.getSumaPort();
+                        // TODO initialize WS operation arguments here
+                        out.print("Número de visitas a la página: ");
+                        out.println(port.contar(hitsCount));
+
+                        application.setAttribute("hitCounter", port.contar(hitsCount));
+
+                    } catch (Exception ex) {
+                        // TODO handle custom exceptions here
+                    }
+                %>
+            </h6>
+            </font>
+
+        </div>
+    </center>
+
+<!--fin de llamada a Web Service -->
+
         <!-- header -->
         <header>
             <!-- header inner -->
